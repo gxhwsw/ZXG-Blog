@@ -10,5 +10,17 @@
         <property name="serverTimezone" value="Asia/Shanghai" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="MySQL - @localhost" uuid="44fc46c3-bdea-4616-8d3e-ee75a159d7fc">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="sg_blog@112.124.39.66" uuid="96c23be0-cfff-4f34-ba13-785e5958a5f6">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://112.124.39.66:3306/sg_blog</jdbc-url>
+    </data-source>
   </component>
 </project>

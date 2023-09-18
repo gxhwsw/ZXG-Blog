@@ -9,9 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="zxg-admin" />
         <module name="zxg-framework" />
-        <module name="spring09_ssm01_result" />
         <module name="zxg-blog" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>

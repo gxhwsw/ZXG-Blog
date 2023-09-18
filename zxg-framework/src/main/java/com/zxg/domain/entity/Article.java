@@ -4,11 +4,14 @@ import java.util.Date;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
 /**
  * 文章表(Article)表实体类
  *
@@ -19,7 +22,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("zxg_article")
+@TableName("sg_article")
+@Accessors(chain = true)
 public class Article  {
     @TableId
     private Long id;
@@ -51,7 +55,8 @@ public class Article  {
     private Date updateTime;
     //删除标志（0代表未删除，1代表已删除）
     private Integer delFlag;
-
+    @TableField(exist = false)
+    private String categoryName;
 
 
 
