@@ -1,6 +1,9 @@
 server:
   port: 7777
 spring:
+  redis:
+    database: 1
+    host: 120.26.14.134
   datasource:
     url: jdbc:mysql://112.124.39.66:3306/sg_blog?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
