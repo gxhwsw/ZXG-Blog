@@ -1,0 +1,855 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/zxg-admin/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/zxg-admin/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/zxg-blog/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/zxg-blog/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/zxg-framework/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/zxg-framework/src/main/resources\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision 31fd584ed07f25056bddc3969f2f3ae2c5fdd96d)
++++ b/.idea/encodings.xml	(date 1695084129477)
+@@ -1,6 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/zxg-admin/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/zxg-admin/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/zxg-blog/src/main/java" charset="UTF-8" />
+Index: zxg-framework/src/main/java/com/zxg/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/service/UserService.java b/zxg-framework/src/main/java/com/zxg/service/UserService.java
+new file mode 100644
+--- /dev/null	(date 1695090375034)
++++ b/zxg-framework/src/main/java/com/zxg/service/UserService.java	(date 1695090375034)
+@@ -0,0 +1,16 @@
++package com.zxg.service;
++
++import com.baomidou.mybatisplus.extension.service.IService;
++import com.zxg.domain.entity.User;
++
++
++/**
++ * 用户表(User)表服务接口
++ *
++ * @author makejava
++ * @since 2023-09-19 10:20:49
++ */
++public interface UserService extends IService<User> {
++
++}
++
+Index: zxg-framework/src/main/java/com/zxg/domain/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/domain/entity/User.java b/zxg-framework/src/main/java/com/zxg/domain/entity/User.java
+new file mode 100644
+--- /dev/null	(date 1695090375189)
++++ b/zxg-framework/src/main/java/com/zxg/domain/entity/User.java	(date 1695090375189)
+@@ -0,0 +1,57 @@
++package com.zxg.domain.entity;
++
++import java.util.Date;
++
++import java.io.Serializable;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++import com.baomidou.mybatisplus.annotation.TableId;
++import com.baomidou.mybatisplus.annotation.TableName;
++/**
++ * 用户表(User)表实体类
++ *
++ * @author makejava
++ * @since 2023-09-19 10:19:02
++ */
++@SuppressWarnings("serial")
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
++@TableName("sys_user")
++public class User  {
++    //主键@TableId
++    private Long id;
++
++    //用户名
++    private String userName;
++    //昵称
++    private String nickName;
++    //密码
++    private String password;
++    //用户类型：0代表普通用户，1代表管理员
++    private String type;
++    //账号状态（0正常 1停用）
++    private String status;
++    //邮箱
++    private String email;
++    //手机号
++    private String phonenumber;
++    //用户性别（0男，1女，2未知）
++    private String sex;
++    //头像
++    private String avatar;
++    //创建人的用户id
++    private Long createBy;
++    //创建时间
++    private Date createTime;
++    //更新人
++    private Long updateBy;
++    //更新时间
++    private Date updateTime;
++    //删除标志（0代表未删除，1代表已删除）
++    private Integer delFlag;
++
++
++
++}
+Index: zxg-framework/src/main/java/com/zxg/domain/entity/Comment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/domain/entity/Comment.java b/zxg-framework/src/main/java/com/zxg/domain/entity/Comment.java
+new file mode 100644
+--- /dev/null	(date 1695087237692)
++++ b/zxg-framework/src/main/java/com/zxg/domain/entity/Comment.java	(date 1695087237692)
+@@ -0,0 +1,51 @@
++package com.zxg.domain.entity;
++
++import java.util.Date;
++
++import java.io.Serializable;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++import com.baomidou.mybatisplus.annotation.TableId;
++import com.baomidou.mybatisplus.annotation.TableName;
++/**
++ * 评论表(Comment)表实体类
++ *
++ * @author makejava
++ * @since 2023-09-19 09:24:33
++ */
++@SuppressWarnings("serial")
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
++@TableName("sg_comment")
++public class Comment  {
++    @TableId
++    private Long id;
++
++    //评论类型（0代表文章评论，1代表友链评论）
++    private String type;
++    //文章id
++    private Long articleId;
++    //根评论id
++    private Long rootId;
++    //评论内容
++    private String content;
++    //所回复的目标评论的userid
++    private Long toCommentUserId;
++    //回复目标评论id
++    private Long toCommentId;
++    
++    private Long createBy;
++    
++    private Date createTime;
++    
++    private Long updateBy;
++    
++    private Date updateTime;
++    //删除标志（0代表未删除，1代表已删除）
++    private Integer delFlag;
++
++
++
++}
+Index: zxg-framework/src/main/java/com/zxg/mapper/UserMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/mapper/UserMapper.java b/zxg-framework/src/main/java/com/zxg/mapper/UserMapper.java
+new file mode 100644
+--- /dev/null	(date 1695090374914)
++++ b/zxg-framework/src/main/java/com/zxg/mapper/UserMapper.java	(date 1695090374914)
+@@ -0,0 +1,16 @@
++package com.zxg.mapper;
++
++import com.baomidou.mybatisplus.core.mapper.BaseMapper;
++import com.zxg.domain.entity.User;
++
++
++/**
++ * 用户表(User)表数据库访问层
++ *
++ * @author makejava
++ * @since 2023-09-19 10:19:00
++ */
++public interface UserMapper extends BaseMapper<User> {
++
++}
++
+Index: zxg-framework/src/main/java/com/zxg/service/impl/UserServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/service/impl/UserServiceImpl.java b/zxg-framework/src/main/java/com/zxg/service/impl/UserServiceImpl.java
+new file mode 100644
+--- /dev/null	(date 1695090375164)
++++ b/zxg-framework/src/main/java/com/zxg/service/impl/UserServiceImpl.java	(date 1695090375164)
+@@ -0,0 +1,19 @@
++package com.zxg.service.impl;
++
++import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
++import com.zxg.domain.entity.User;
++import com.zxg.mapper.UserMapper;
++import com.zxg.service.UserService;
++import org.springframework.stereotype.Service;
++
++/**
++ * 用户表(User)表服务实现类
++ *
++ * @author makejava
++ * @since 2023-09-19 10:17:44
++ */
++@Service("userService")
++public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
++
++}
++
+Index: zxg-blog/src/main/java/com/zxg/controller/CommentController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-blog/src/main/java/com/zxg/controller/CommentController.java b/zxg-blog/src/main/java/com/zxg/controller/CommentController.java
+new file mode 100644
+--- /dev/null	(date 1695091684342)
++++ b/zxg-blog/src/main/java/com/zxg/controller/CommentController.java	(date 1695091684342)
+@@ -0,0 +1,29 @@
++package com.zxg.controller;
++
++import com.zxg.domain.ResponseResult;
++import com.zxg.domain.entity.Comment;
++import com.zxg.service.CommentService;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.web.bind.annotation.*;
++
++@RestController
++@RequestMapping("/comment")
++public class CommentController {
++
++    @Autowired
++    private CommentService commentService;
++
++    @GetMapping("/commentList")
++    public ResponseResult commentList(Long articleId,Integer pageNum,Integer pageSize){
++
++       return commentService.commentList(articleId,pageNum,pageSize);
++
++    }
++    @PostMapping("")
++    public ResponseResult addCommnet(@RequestBody Comment comment){
++        return commentService.addComment(comment);
++    }
++}
++
++
++
+Index: zxg-framework/src/main/java/com/zxg/domain/vo/CommentVo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/domain/vo/CommentVo.java b/zxg-framework/src/main/java/com/zxg/domain/vo/CommentVo.java
+new file mode 100644
+--- /dev/null	(date 1695090894930)
++++ b/zxg-framework/src/main/java/com/zxg/domain/vo/CommentVo.java	(date 1695090894930)
+@@ -0,0 +1,39 @@
++package com.zxg.domain.vo;
++
++import com.baomidou.mybatisplus.annotation.TableId;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++
++import java.util.Date;
++import java.util.List;
++
++@Data
++@NoArgsConstructor
++@AllArgsConstructor
++public class CommentVo {
++
++    @TableId
++    private Long id;
++    //文章id
++    private Long articleId;
++    //根评论id
++    private Long rootId;
++    //评论内容
++    private String content;
++    //所回复的目标评论的userid
++    private Long toCommentUserId;
++    //评论人的名称
++    private String toCommentUserName;
++    //回复目标评论id
++    private Long toCommentId;
++
++    private Long createBy;
++
++    private Date createTime;
++
++    private String username;
++
++    private List<CommentVo> children;
++
++}
+Index: zxg-blog/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <parent>\r\n        <artifactId>ZXGBlog</artifactId>\r\n        <groupId>com.zxg</groupId>\r\n        <version>1.0-SNAPSHOT</version>\r\n    </parent>\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <artifactId>zxg-blog</artifactId>\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>com.zxg</groupId>\r\n            <artifactId>zxg-framework</artifactId>\r\n            <version>1.0-SNAPSHOT</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-blog/pom.xml b/zxg-blog/pom.xml
+--- a/zxg-blog/pom.xml	(revision 31fd584ed07f25056bddc3969f2f3ae2c5fdd96d)
++++ b/zxg-blog/pom.xml	(date 1695087393311)
+@@ -16,6 +16,21 @@
+             <artifactId>zxg-framework</artifactId>
+             <version>1.0-SNAPSHOT</version>
+         </dependency>
++        <dependency>
++            <groupId>junit</groupId>
++            <artifactId>junit</artifactId>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.springframework</groupId>
++            <artifactId>spring-test</artifactId>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-test</artifactId>
++            <scope>test</scope>
++        </dependency>
+     </dependencies>
+ 
+ </project>
+\ No newline at end of file
+Index: zxg-framework/src/main/java/com/zxg/service/impl/CommentServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/service/impl/CommentServiceImpl.java b/zxg-framework/src/main/java/com/zxg/service/impl/CommentServiceImpl.java
+new file mode 100644
+--- /dev/null	(date 1695093524892)
++++ b/zxg-framework/src/main/java/com/zxg/service/impl/CommentServiceImpl.java	(date 1695093524892)
+@@ -0,0 +1,106 @@
++package com.zxg.service.impl;
++
++import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
++import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
++import com.baomidou.mybatisplus.core.toolkit.Wrappers;
++import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
++import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
++import com.zxg.domain.ResponseResult;
++import com.zxg.domain.entity.Comment;
++
++
++import com.zxg.domain.vo.CommentVo;
++import com.zxg.domain.vo.PageVo;
++import com.zxg.mapper.CommentMapper;
++import com.zxg.service.CommentService;
++import com.zxg.service.UserService;
++import com.zxg.utils.BeanCopyUtils;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
++
++import java.util.List;
++
++/**
++ * 评论表(Comment)表服务实现类
++ *
++ * @author makejava
++ * @since 2023-09-19 09:26:34
++ */
++@Service("commentService")
++public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
++
++
++    @Autowired
++    private UserService userService;
++    /**
++     * 查询文章评论列表
++     * @param articleId
++     * @param pageNum
++     * @param pageSize
++     * @return {@link ResponseResult}
++     */
++    @Override
++    public ResponseResult commentList(Long articleId, Integer pageNum, Integer pageSize) {
++        //查询文章评论
++        LambdaQueryWrapper<Comment> queryWrapper= new LambdaQueryWrapper();
++
++        queryWrapper.eq(Comment::getArticleId,articleId);
++        queryWrapper.eq(Comment::getRootId,-1);
++
++        Page<Comment> page=new Page<>(pageNum,pageSize);
++        page(page,queryWrapper);
++
++        List<CommentVo> commentVoList= toCommentVoList(page.getRecords());
++        //查询子集合 赋值
++        for (CommentVo commentVo : commentVoList) {
++            List<CommentVo> children=getChildren(commentVo.getId());
++            commentVo.setChildren(children);
++        }
++
++        return ResponseResult.okResult(new PageVo(commentVoList,page.getTotal()));
++    }
++
++    /**
++     * 添加评论
++     * @param comment
++     * @return {@link ResponseResult}
++     */
++    @Override
++    public ResponseResult addComment(Comment comment) {
++        // TODO 获取当前用户id 待完成
++        //comment.setCreateBy();
++
++        save(comment);
++        return null;
++    }
++
++    /**
++     * 查询子评论
++     * @param id
++     * @return {@link List}<{@link CommentVo}>
++     */
++    private List<CommentVo> getChildren(Long id) {
++        LambdaQueryWrapper<Comment> queryWrapper=new LambdaQueryWrapper();
++        queryWrapper.eq(Comment::getRootId,id);
++
++        queryWrapper.orderByAsc(Comment::getCreateTime);
++        List<Comment> comments=list(queryWrapper);
++
++        List<CommentVo> commentVos = toCommentVoList(comments);
++        return commentVos;
++    }
++
++    private List<CommentVo> toCommentVoList(List<Comment> list){
++        List<CommentVo> commentVos = BeanCopyUtils.copyBeanList(list, CommentVo.class);
++        for (CommentVo commentVo : commentVos) {
++            String nickName = userService.getById(commentVo.getCreateBy()).getNickName();
++            commentVo.setUsername(nickName);
++            if(commentVo.getToCommentUserId()!=-1){
++                String toCommentUserName = userService.getById(commentVo.getToCommentUserId()).getNickName();
++                commentVo.setToCommentUserName(toCommentUserName);
++            }
++        }
++        return commentVos;
++    }
++}
++
+Index: zxg-framework/src/main/java/com/zxg/mapper/CommentMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/mapper/CommentMapper.java b/zxg-framework/src/main/java/com/zxg/mapper/CommentMapper.java
+new file mode 100644
+--- /dev/null	(date 1695087238185)
++++ b/zxg-framework/src/main/java/com/zxg/mapper/CommentMapper.java	(date 1695087238185)
+@@ -0,0 +1,16 @@
++package com.zxg.mapper;
++
++import com.baomidou.mybatisplus.core.mapper.BaseMapper;
++import com.zxg.domain.entity.Comment;
++
++
++/**
++ * 评论表(Comment)表数据库访问层
++ *
++ * @author makejava
++ * @since 2023-09-19 09:24:31
++ */
++public interface CommentMapper extends BaseMapper<Comment> {
++
++}
++
+Index: zxg-framework/src/main/java/com/zxg/service/CommentService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/service/CommentService.java b/zxg-framework/src/main/java/com/zxg/service/CommentService.java
+new file mode 100644
+--- /dev/null	(date 1695091684427)
++++ b/zxg-framework/src/main/java/com/zxg/service/CommentService.java	(date 1695091684427)
+@@ -0,0 +1,32 @@
++package com.zxg.service;
++
++import com.baomidou.mybatisplus.extension.service.IService;
++import com.zxg.domain.ResponseResult;
++import com.zxg.domain.entity.Comment;
++
++
++/**
++ * 评论表(Comment)表服务接口
++ *
++ * @author makejava
++ * @since 2023-09-19 09:26:32
++ */
++public interface CommentService extends IService<Comment> {
++
++    /**
++     * 查询评论列表
++     * @param articleId
++     * @param pageNum
++     * @param pageSize
++     * @return {@link ResponseResult}
++     */
++    ResponseResult commentList(Long articleId, Integer pageNum, Integer pageSize);
++
++    /**
++     * 评论
++     * @param comment
++     * @return {@link ResponseResult}
++     */
++    ResponseResult addComment(Comment comment);
++}
++
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile default=\"true\" name=\"Default\" enabled=\"true\" />\r\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <module name=\"zxg-admin\" />\r\n        <module name=\"zxg-framework\" />\r\n        <module name=\"zxg-blog\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n    <bytecodeTargetLevel target=\"8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 31fd584ed07f25056bddc3969f2f3ae2c5fdd96d)
++++ b/.idea/compiler.xml	(date 1695086356412)
+@@ -8,8 +8,8 @@
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+         <outputRelativeToContentRoot value="true" />
+         <module name="zxg-admin" />
+-        <module name="zxg-framework" />
+         <module name="zxg-blog" />
++        <module name="zxg-framework" />
+       </profile>
+     </annotationProcessing>
+     <bytecodeTargetLevel target="8" />
+Index: zxg-framework/src/main/java/com/zxg/utils/SecurityUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/zxg-framework/src/main/java/com/zxg/utils/SecurityUtils.java b/zxg-framework/src/main/java/com/zxg/utils/SecurityUtils.java
+new file mode 100644
+--- /dev/null	(date 1695093524916)
++++ b/zxg-framework/src/main/java/com/zxg/utils/SecurityUtils.java	(date 1695093524916)
+@@ -0,0 +1,29 @@
++//package com.zxg.utils;
++//
++//public class SecurityUtils
++//{
++//
++//    /**
++//     * 获取用户
++//     **/
++//    public static LoginUser getLoginUser()
++//    {
++//        return (LoginUser) getAuthentication().getPrincipal();
++//    }
++//
++//    /**
++//     * 获取Authentication
++//     */
++//    public static Authentication getAuthentication() {
++//        return SecurityContextHolder.getContext().getAuthentication();
++//    }
++//
++//    public static Boolean isAdmin(){
++//        Long id = getLoginUser().getUser().getId();
++//        return id != null && 1L == id;
++//    }
++//
++//    public static Long getUserId() {
++//        return getLoginUser().getUser().getId();
++//    }
++//}
+\ No newline at end of file
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DataSourceManagerImpl\" format=\"xml\" multifile-model=\"true\">\r\n    <data-source source=\"LOCAL\" name=\"@localhost\" uuid=\"882e3426-07d7-4b16-a542-20c772fc9d72\">\r\n      <driver-ref>mysql.8</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>\r\n      <driver-properties>\r\n        <property name=\"serverTimezone\" value=\"Asia/Shanghai\" />\r\n      </driver-properties>\r\n    </data-source>\r\n    <data-source source=\"LOCAL\" name=\"MySQL - @localhost\" uuid=\"44fc46c3-bdea-4616-8d3e-ee75a159d7fc\">\r\n      <driver-ref>mysql.8</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>\r\n    </data-source>\r\n    <data-source source=\"LOCAL\" name=\"sg_blog@112.124.39.66\" uuid=\"96c23be0-cfff-4f34-ba13-785e5958a5f6\">\r\n      <driver-ref>mysql</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mysql://112.124.39.66:3306/sg_blog</jdbc-url>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+--- a/.idea/dataSources.xml	(revision 31fd584ed07f25056bddc3969f2f3ae2c5fdd96d)
++++ b/.idea/dataSources.xml	(date 1695086518642)
+@@ -16,11 +16,12 @@
+       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+       <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+     </data-source>
+-    <data-source source="LOCAL" name="sg_blog@112.124.39.66" uuid="96c23be0-cfff-4f34-ba13-785e5958a5f6">
+-      <driver-ref>mysql</driver-ref>
++    <data-source source="LOCAL" name="sg_blog@112.124.39.66" uuid="13357a26-8fbf-43a1-910e-d30c5309f8c4">
++      <driver-ref>mysql.8</driver-ref>
+       <synchronize>true</synchronize>
+-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
++      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+       <jdbc-url>jdbc:mysql://112.124.39.66:3306/sg_blog</jdbc-url>
++      <working-dir>$ProjectFileDir$</working-dir>
+     </data-source>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/easyCodeTableSetting.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"EasyCodeTableSetting\">\r\n    <option name=\"tableInfoMap\">\r\n      <map>\r\n        <entry key=\"sg_blog.sg_category\">\r\n          <value>\r\n            <TableInfoDTO>\r\n              <option name=\"comment\" value=\"分类表\" />\r\n              <option name=\"fullColumn\">\r\n                <list>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"id\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"分类名\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"name\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"父分类id，如果没有父分类为-1\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"pid\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"描述\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"description\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"状态0:正常,1禁用\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"status\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createBy\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateBy\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"删除标志（0代表未删除，1代表已删除）\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"delFlag\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                </list>\r\n              </option>\r\n              <option name=\"name\" value=\"SgCategory\" />\r\n              <option name=\"preName\" value=\"sg_\" />\r\n              <option name=\"saveModelName\" value=\"zxg-framework\" />\r\n              <option name=\"savePackageName\" value=\"\" />\r\n              <option name=\"savePath\" value=\"./zxg-framework/src/main/java\" />\r\n              <option name=\"templateGroupName\" value=\"MybatisPlus\" />\r\n            </TableInfoDTO>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"zxg_blog.zxg_article\">\r\n          <value>\r\n            <TableInfoDTO>\r\n              <option name=\"comment\" value=\"文章表\" />\r\n              <option name=\"fullColumn\">\r\n                <list>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"id\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"标题\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"title\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"文章内容\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"content\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"文章摘要\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"summary\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"所属分类id\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"categoryId\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"缩略图\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"thumbnail\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"是否置顶（0否，1是）\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"isTop\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"状态（0已发布，1草稿）\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"status\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"访问量\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"viewCount\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"是否允许评论 1是，0否\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"isComment\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createBy\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateBy\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"删除标志（0代表未删除，1代表已删除）\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"delFlag\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                </list>\r\n              </option>\r\n              <option name=\"name\" value=\"ZxgArticle\" />\r\n              <option name=\"preName\" value=\"zxg_\" />\r\n              <option name=\"saveModelName\" value=\"zxg-framework\" />\r\n              <option name=\"savePackageName\" value=\"com.zxg.domain\" />\r\n              <option name=\"savePath\" value=\"./zxg-framework/src/main/java/com/zxg/domain\" />\r\n              <option name=\"templateGroupName\" value=\"MybatisPlus\" />\r\n            </TableInfoDTO>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/easyCodeTableSetting.xml b/.idea/easyCodeTableSetting.xml
+--- a/.idea/easyCodeTableSetting.xml	(revision 31fd584ed07f25056bddc3969f2f3ae2c5fdd96d)
++++ b/.idea/easyCodeTableSetting.xml	(date 1695090374657)
+@@ -85,6 +85,224 @@
+             </TableInfoDTO>
+           </value>
+         </entry>
++        <entry key="sg_blog.sg_comment">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="评论表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="评论类型（0代表文章评论，1代表友链评论）" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="type" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="文章id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="articleId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="根评论id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="rootId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="评论内容" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="content" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="所回复的目标评论的userid" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="toCommentUserId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="回复目标评论id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="toCommentId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createBy" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="删除标志（0代表未删除，1代表已删除）" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="delFlag" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SgComment" />
++              <option name="preName" value="sg_" />
++              <option name="saveModelName" value="zxg-framework" />
++              <option name="savePackageName" value="" />
++              <option name="savePath" value="./zxg-framework/src/main/java" />
++              <option name="templateGroupName" value="MybatisPlus" />
++            </TableInfoDTO>
++          </value>
++        </entry>
++        <entry key="sg_blog.sys_user">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="用户表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="用户名" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="userName" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="昵称" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="nickName" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="密码" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="password" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="用户类型：0代表普通用户，1代表管理员" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="type" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="账号状态（0正常 1停用）" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="status" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="邮箱" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="email" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="手机号" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="phonenumber" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="用户性别（0男，1女，2未知）" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="sex" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="头像" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="avatar" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人的用户id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createBy" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="删除标志（0代表未删除，1代表已删除）" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="delFlag" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SysUser" />
++              <option name="preName" value="sys_" />
++              <option name="saveModelName" value="zxg-blog" />
++              <option name="savePackageName" value="" />
++              <option name="savePath" value="./zxg-blog/src/main/java" />
++              <option name="templateGroupName" value="MybatisPlus" />
++            </TableInfoDTO>
++          </value>
++        </entry>
+         <entry key="zxg_blog.zxg_article">
+           <value>
+             <TableInfoDTO>
