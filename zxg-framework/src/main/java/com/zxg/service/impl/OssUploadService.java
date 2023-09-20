@@ -10,7 +10,10 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.zxg.domain.ResponseResult;
+import com.zxg.enums.AppHttpCodeEnum;
+import com.zxg.exception.SystemException;
 import com.zxg.service.UploadService;
+import com.zxg.utils.PathUtils;
 import lombok.Data;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,17 +33,15 @@ public class OssUploadService implements UploadService {
         String originalFilename = img.getOriginalFilename();
         //对原始文件名进行判断
         if(!originalFilename.endsWith(".png")){
-            // TODO 未完成
-            //throw new SystemException(AppHttpCodeEnum.FILE_TYPE_ERROR);
+            throw new SystemException(AppHttpCodeEnum.FILE_TYPE_ERROR);
         }
 
         //如果判断通过上传文件到OSS
-        // TODO 文件上传
-//        String filePath = PathUtils.generateFilePath(originalFilename);
-        String filePath=null;
+        String filePath = PathUtils.generateFilePath(originalFilename);
         String url = uploadOss(img,filePath);//  2099/2/3/wqeqeqe.png
         return ResponseResult.okResult(url);
     }
+
 
     private String accessKey;
     private String secretKey;
@@ -64,7 +65,7 @@ public class OssUploadService implements UploadService {
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
-                return "http://r7yxkqloa.bkt.clouddn.com/"+key;
+                return "http://s183r1xmo.hn-bkt.clouddn.com/"+key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 System.err.println(r.toString());

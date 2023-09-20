@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zxg-admin" />
-        <module name="zxg-framework" />
         <module name="zxg-blog" />
+        <module name="zxg-framework" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

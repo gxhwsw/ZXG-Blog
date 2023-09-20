@@ -8,6 +8,8 @@ import com.zxg.domain.ResponseResult;
 import com.zxg.domain.entity.Comment;
 import com.zxg.domain.vo.CommentVo;
 import com.zxg.domain.vo.PageVo;
+import com.zxg.enums.AppHttpCodeEnum;
+import com.zxg.exception.SystemException;
 import com.zxg.mapper.CommentMapper;
 import com.zxg.service.CommentService;
 import com.zxg.service.UserService;
@@ -32,7 +34,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         queryWrapper.eq(SystemConstants.ARTICLE_COMMENT.equals(commentType),Comment::getArticleId,articleId);
         //根评论 rootId为-1
         queryWrapper.eq(Comment::getRootId,-1);
-
         //评论类型
         queryWrapper.eq(Comment::getType,commentType);
         //分页查询
@@ -41,8 +42,31 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
         List<CommentVo> commentVoList = toCommentVoList(page.getRecords());
 
+        //查询所有根评论对应的子评论集合，并且赋值给对应的属性
+        for (CommentVo commentVo : commentVoList) {
+            //查询对应的子评论
+            List<CommentVo> children = getChildren(commentVo.getId());
+            //赋值
+            commentVo.setChildren(children);
+        }
+
         return ResponseResult.okResult(new PageVo(commentVoList,page.getTotal()));
     }
+
+    @Override
+    public ResponseResult addComment(Comment comment) {
+        //评论内容不能为空
+        if(!StringUtils.hasText(comment.getContent())){
+            throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
+        }
+        save(comment);
+        return ResponseResult.okResult();
+    }
+
+
+
+
+
 
     private List<CommentVo> toCommentVoList(List<Comment> list){
         List<CommentVo> commentVos = BeanCopyUtils.copyBeanList(list, CommentVo.class);
@@ -62,15 +86,21 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
 
-    @Override
-    public ResponseResult addComment(Comment comment) {
-        //评论内容不能为空
-        if(!StringUtils.hasText(comment.getContent())){
-            // TODO 待完成
-            //throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
-        }
-        save(comment);
-        return ResponseResult.okResult();
+
+    /**
+     * 根据根评论的id查询所对应的子评论的集合
+     * @param id 根评论的id
+     * @return
+     */
+    private List<CommentVo> getChildren(Long id) {
+
+        LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Comment::getRootId,id);
+        queryWrapper.orderByAsc(Comment::getCreateTime);
+        List<Comment> comments = list(queryWrapper);
+
+        List<CommentVo> commentVos = toCommentVoList(comments);
+        return commentVos;
     }
 }
 

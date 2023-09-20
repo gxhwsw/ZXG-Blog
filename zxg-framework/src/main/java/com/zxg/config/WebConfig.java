@@ -51,7 +51,6 @@ public class WebConfig implements WebMvcConfigurer {
         return converter;
     }
 
-    // TODO 删除config中的友链的登录验证
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(fastJsonHttpMessageConverters());
