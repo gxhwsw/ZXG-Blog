@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +27,6 @@ public class ArticleDetailVo {
     //文章内容
     private Long content;
 
-    private Data createTime;
+    private Date createTime;
 
 }

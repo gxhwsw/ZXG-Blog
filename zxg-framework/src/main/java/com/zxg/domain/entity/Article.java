@@ -19,11 +19,11 @@ import lombok.experimental.Accessors;
  * @since 2023-09-15 19:16:10
  */
 @SuppressWarnings("serial")
+@TableName("sg_article")
 @Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("sg_article")
-@Accessors(chain = true)
 public class Article  {
     @TableId
     private Long id;
@@ -58,9 +58,7 @@ public class Article  {
     @TableField(exist = false)
     private String categoryName;
 
-    public Article(Long id, Long viewCount) {
-        this.id = id;
-        this.viewCount = viewCount;
-    }
+
+
 }
 
