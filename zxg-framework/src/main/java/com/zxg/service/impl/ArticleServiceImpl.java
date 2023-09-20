@@ -15,7 +15,9 @@ import com.zxg.service.ArticleService;
 import com.zxg.service.CategoryService;
 import com.zxg.utils.BeanCopyUtils;
 import com.zxg.domain.vo.HotArticleVo;
+import com.zxg.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +32,9 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private RedisCache redisCache;
 
 
 
@@ -93,9 +98,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getArticleDetail(Long id) {
         //根据id查询文章
         Article article = getById(id);
-//转换成VO
+        //在redis中获取浏览量
+        Integer viewCount = redisCache.getCacheMapValue(SystemConstants.REDIS_KEY, id.toString());
+        article.setViewCount(viewCount.longValue());
+        //转换成VO
         ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
-//根据分类id查询分类名
+        //根据分类id查询分类名
         Long categoryId = articleDetailVo.getCategoryId();
         Category category = categoryService.getById(categoryId);
         if(category!=null){
@@ -103,6 +111,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         }
 //封装响应返回
         return ResponseResult.okResult(articleDetailVo);
+    }
+
+    @Override
+    public ResponseResult updateVoewCount(Long id) {
+        redisCache.incrementCacheMapValue(SystemConstants.REDIS_KEY,id.toString(),1);
+        return ResponseResult.okResult();
     }
 }
 

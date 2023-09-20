@@ -2,6 +2,7 @@ package com.zxg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zxg.domain.entity.Article;
+import org.springframework.web.bind.annotation.Mapping;
 
 /**
  * @author gxhhhh

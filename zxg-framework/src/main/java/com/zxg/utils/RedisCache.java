@@ -235,4 +235,12 @@ public class RedisCache
     {
         return redisTemplate.keys(pattern);
     }
+
+
+    /**
+     *增加游览量   更新reids中的数据
+     */
+    public void incrementCacheMapValue(String key,String hkey,int v){
+        redisTemplate.opsForHash().increment(key,hkey,v);
+    }
 }

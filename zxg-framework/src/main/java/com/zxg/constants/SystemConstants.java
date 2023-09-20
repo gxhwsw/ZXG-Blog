@@ -27,4 +27,9 @@ public class SystemConstants {
      *评论类型  友链评论
      */
     public static final String LINK_COMMENT = "1";
+
+    /**
+     *获取游览量的key值
+     */
+    public static final String REDIS_KEY="Article:viewCount";
 }
