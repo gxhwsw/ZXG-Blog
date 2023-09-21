@@ -2,8 +2,6 @@ package com.zxg.config;
 
 
 import com.zxg.filter.JwtAuthenticationTokenFilter;
-
-import com.zxg.handler.security.AccessDeniedEentryPointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,17 +43,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 // 对于登录接口 允许匿名访问
-                .antMatchers("/login").anonymous()
-                .antMatchers("/user/userInfo").authenticated()
-                .antMatchers("/loginout").authenticated()
-                .antMatchers("/commit").authenticated()
-// 除上面外的所有请求全部不需要认证即可访问
-                .anyRequest().permitAll();
+                .antMatchers("/user/login").anonymous()
+//                .antMatchers("/user/userInfo").authenticated()
+//                .antMatchers("loginout").authenticated()
+//                .antMatchers("/commit").authenticated()
+//  全部需要认证才能访问
+                .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 //把jwtAuthenticationTokenFilter添加到SpringSecurity的过滤器链中
         http.exceptionHandling()
                         .accessDeniedHandler(accessDeniedHandler   )
-                                .authenticationEntryPoint(authenticationEntryPoint);
+                .authenticationEntryPoint(authenticationEntryPoint);
+        //关闭默认的注销功能
         http.logout().disable();
 //允许跨域
         http.cors();

@@ -32,4 +32,7 @@ public class SystemConstants {
      *获取游览量的key值
      */
     public static final String REDIS_KEY="Article:viewCount";
+
+    public static final String MENU="C";
+    public static final String BUTTON="F";
 }

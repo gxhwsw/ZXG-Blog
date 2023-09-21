@@ -22,7 +22,7 @@ public class UpdateViewCountJob {
     private ArticleService articleService;
 
 //    Long.valueOf(entry.getKey()),entry.getValue().longValue())
-    @Scheduled(cron = "0/55 * * * * ?")
+    @Scheduled(cron = "0/5555 * * * * ?")
     public void updateViewCount(){
         //获取redis中的浏览量
         Map<String, Integer> viewCountMap = redisCache.getCacheMap(SystemConstants.REDIS_KEY);
